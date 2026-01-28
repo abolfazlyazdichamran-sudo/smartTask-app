@@ -1,0 +1,17 @@
+public class Task {
+    private int id;
+    private String title;
+    private String description;
+    private long reminderTime;
+    private boolean isDone;
+
+    // Constructor
+    public Task(String title, String description, long reminderTime) {
+        this.title = title;
+        this.description = description;
+        this.reminderTime = reminderTime;
+        this.isDone = false;
+    }
+
+    // Getter & Setter
+}
