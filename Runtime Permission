@@ -1,0 +1,17 @@
+public class PermissionUtil {
+
+    public static boolean checkNotificationPermission(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (activity.checkSelfPermission(
+                    Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                activity.requestPermissions(
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        100);
+                return false;
+            }
+        }
+        return true;
+    }
+}
