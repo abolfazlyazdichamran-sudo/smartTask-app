@@ -1,0 +1,37 @@
+public class TaskDatabaseHelper extends SQLiteOpenHelper {
+
+    private static final String DB_NAME = "tasks.db";
+    private static final int DB_VERSION = 1;
+
+    public TaskDatabaseHelper(Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        String CREATE_TABLE = "CREATE TABLE tasks (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "title TEXT," +
+                "description TEXT," +
+                "reminder_time INTEGER," +
+                "is_done INTEGER)";
+        db.execSQL(CREATE_TABLE);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS tasks");
+        onCreate(db);
+    }
+
+    // Insert
+    public void insertTask(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("title", task.getTitle());
+        cv.put("description", task.getDescription());
+        cv.put("reminder_time", task.getReminderTime());
+        cv.put("is_done", task.isDone() ? 1 : 0);
+        db.insert("tasks", null, cv);
+    }
+}
