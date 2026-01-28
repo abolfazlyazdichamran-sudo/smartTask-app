@@ -1,0 +1,13 @@
+public class ReminderService extends Service {
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        // Background task (check reminder time)
+        return START_STICKY;
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+}
